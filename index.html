@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Thu Mua Nguyên Liệu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Nhập Dữ Liệu Thu Mua</h1>
+        
+        <form id="purchaseForm">
+            <table id="purchaseTable">
+                <thead>
+                    <tr>
+                        <th>Ngày nhập</th>
+                        <th>Tên nguyên liệu</th>
+                        <th>Nhà cung cấp</th>
+                        <th>Số lượng</th>
+                        <th>Mục đích</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="date" name="date[]" required></td>
+                        <td><input type="text" name="material[]" placeholder="Tên nguyên liệu" required></td>
+                        <td><input type="text" name="supplier[]" placeholder="Nhà cung cấp" required></td>
+                        <td><input type="number" name="quantity[]" placeholder="0" min="1" required></td>
+                        <td><input type="text" name="purpose[]" placeholder="Sản xuất/Kho..."></td>
+                        <td><button type="button" class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="actions">
+                <button type="button" class="btn-add" onclick="addRow()">+ Thêm dòng</button>
+                <button type="submit" class="btn-submit">Lưu dữ liệu</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
