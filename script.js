@@ -1,5 +1,32 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAmL-1Vc9RkbwXipkFgsXkf3jeaHJq2TYsQq4RF0-Jm-cJsoroBiH4OMhjwiNqQNOW/exec';
+const SCRIPT_URL = 'DÁN_LINK_WEB_APP_URL_CỦA_BẠN_Ở_ĐÂY';
 
+// 1. Hàm thêm dòng mới
+function addRow() {
+    const table = document.getElementById("purchaseTable").getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    newRow.innerHTML = `
+        <td><input type="date" name="date[]" required></td>
+        <td><input type="text" name="material[]" placeholder="Tên nguyên liệu" required></td>
+        <td><input type="text" name="supplier[]" placeholder="Nhà cung cấp" required></td>
+        <td><input type="number" name="quantity[]" placeholder="0" min="1" required></td>
+        <td><input type="text" name="purpose[]" placeholder="Sản xuất/Kho..."></td>
+        <td><button type="button" class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
+    `;
+}
+
+// 2. Hàm xóa dòng
+function deleteRow(btn) {
+    const row = btn.parentNode.parentNode;
+    const rowCount = document.getElementById("purchaseTable").rows.length;
+    if (rowCount > 2) {
+        row.parentNode.removeChild(row);
+    } else {
+        alert("Phải có ít nhất một dòng dữ liệu!");
+    }
+}
+
+// 3. Xử lý gửi dữ liệu khi nhấn Lưu
 document.getElementById('purchaseForm').onsubmit = function(e) {
     e.preventDefault();
     
@@ -7,7 +34,6 @@ document.getElementById('purchaseForm').onsubmit = function(e) {
     const rows = table.getElementsByTagName('tbody')[0].rows;
     const data = [];
 
-    // Thu thập dữ liệu từ từng hàng
     for (let i = 0; i < rows.length; i++) {
         data.push({
             date: rows[i].querySelector('input[name="date[]"]').value,
@@ -18,23 +44,19 @@ document.getElementById('purchaseForm').onsubmit = function(e) {
         });
     }
 
-// Thay đổi phần Fetch trong script.js
-fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors', // Thêm dòng này để bỏ qua chặn trình duyệt
-    cache: 'no-cache',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-})
-.then(() => {
-    // Vì dùng 'no-cors', trình duyệt không đọc được phản hồi thành công
-    // nên chúng ta mặc định báo thành công nếu không rơi vào .catch
-    alert("Dữ liệu đã được gửi đi! Vui lòng kiểm tra Google Sheet.");
-    document.getElementById('purchaseForm').reset();
-})
-.catch(error => {
-    console.error('Lỗi:', error);
-    alert("Có lỗi xảy ra khi kết nối.");
-});
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', 
+        cache: 'no-cache',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        alert("Gửi dữ liệu thành công! Hãy kiểm tra Google Sheet.");
+        document.getElementById('purchaseForm').reset();
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+        alert("Có lỗi xảy ra khi gửi.");
+    });
+}; // Dấu đóng ngoặc này cực kỳ quan trọng!
