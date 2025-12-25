@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'DÁN_LINK_WEB_APP_URL_CỦA_BẠN_VÀO_ĐÂY';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOmzOTu0kpVr1yNs4OT9nI9sh5rNGzh4kk6K7JiEyCJDq6gVNiQbmsGhuOSglNc-Ab/exec';
 
 document.getElementById('purchaseForm').onsubmit = function(e) {
     e.preventDefault();
