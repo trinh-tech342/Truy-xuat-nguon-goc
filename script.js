@@ -11,6 +11,7 @@ function addRow() {
         <td><input type="text" name="supplier[]" placeholder="Nhà cung cấp" required></td>
         <td><input type="number" name="quantity[]" placeholder="0" min="1" required></td>
         <td><input type="text" name="purpose[]" placeholder="Sản xuất/Kho..."></td>
+        <td><input type="text" name="unit[]" placeholder="kg/g/cái" required></td>
         <td><button type="button" class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
     `;
 }
@@ -40,7 +41,8 @@ document.getElementById('purchaseForm').onsubmit = function(e) {
             material: rows[i].querySelector('input[name="material[]"]').value,
             supplier: rows[i].querySelector('input[name="supplier[]"]').value,
             quantity: rows[i].querySelector('input[name="quantity[]"]').value,
-            purpose: rows[i].querySelector('input[name="purpose[]"]').value
+            purpose: rows[i].querySelector('input[name="purpose[]"]').value,
+            unit: rows[i].querySelector('input[name="unit[]"]').value
         });
     }
 
